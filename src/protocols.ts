@@ -29,3 +29,9 @@ export type RequestError = {
   name: string,
   message: string,
 };
+
+export type postTicketBody = {         
+  ticketTypeId: number, 
+  enrollmentId: number,
+  status: string,
+}
