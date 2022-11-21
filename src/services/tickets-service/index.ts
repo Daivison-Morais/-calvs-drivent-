@@ -20,13 +20,12 @@ async function findOneTicket(userId: number) {
 }
 
 async function insertTicket(userId: number, ticketTypeId: number) {
+  if (!ticketTypeId) throw requestError(httpStatus.BAD_REQUEST, "RequestError");
+
   const existEnrollment = await ticketRepository.findEnrollmentId(userId);
-  if (!existEnrollment) throw notFoundError();
+  if(!existEnrollment) throw notFoundError();
 
-  const existTicket = await ticketRepository.findTicketByUser(userId);
-  if (!existTicket) throw requestError(httpStatus.BAD_REQUEST, "RequestError");
-
-  const result = await ticketRepository.insertTicket(userId, ticketTypeId);
+  const result = await ticketRepository.insertTicket(userId, existEnrollment.id, ticketTypeId);
   return result;
 }
 

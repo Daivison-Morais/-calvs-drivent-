@@ -26,14 +26,14 @@ async function returnTicket(req: AuthenticatedRequest, res: Response) {
 }
 
 async function insertTicket(req: AuthenticatedRequest, res: Response) {
-  const ticketTypeId: number = req.body.ticketType;
+  const ticketTypeId: number = req.body.ticketTypeId;
   const { userId } = req;
   try {
     const postedTicket = await ticketService.insertTicket(userId, ticketTypeId);
     return res.status(httpStatus.CREATED).send(postedTicket);
   } catch (error) {
     if (error.name === "NotFoundError") {
-      return res.status(httpStatus.NOT_FOUND).send(error);
+      return res.sendStatus(httpStatus.NOT_FOUND);
     }
     if(error.name === "RequestError") {
       return res.status(httpStatus.BAD_REQUEST).send(error);

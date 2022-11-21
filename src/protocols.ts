@@ -35,3 +35,33 @@ export type postTicketBody = {
   enrollmentId: number,
   status: string,
 }
+
+export type postCardBody = {
+	ticketId: number,
+	cardData: {
+		issuer: string,
+    number: number,
+    name: string,
+    expirationDate: Date,
+    cvv: number
+	}
+}
+
+export type paymentResponse = {
+  id: number,
+  ticketId: number,
+  cardIssuer: string,
+  cardLastDigits: string,
+  value: number,
+  createdAt: string | Date,
+  updatedAt: string | Date
+}
+
+export type createPayment = {
+  ticketId: number,
+    value: number,
+    cardIssuer: string,
+    cardLastDigits: string
+    createdAt: string | Date,
+    updatedAt: string | Date
+}
